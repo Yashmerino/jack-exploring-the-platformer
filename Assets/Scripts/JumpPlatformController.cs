@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JumpPlatformController : MonoBehaviour
 {
+    // Components
     private Animator jpAnim;
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class JumpPlatformController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // If jump platform triggered by player then play animation
         if(other.tag == "Player")
         {
             jpAnim.Play("Jump");

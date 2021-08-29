@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class CheckpointController : MonoBehaviour
 {
+    // Components
     private Animator checkpointAnim;
+
+    // Vars
     private bool checkpointReached = false;
 
     // Start is called before the first frame update
@@ -21,6 +24,7 @@ public class CheckpointController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
+        // If checkpoint triggered by play and checkpoint hasn't been reached before then play animation 
         if(other.tag == "Player" && !checkpointReached)
         {
             checkpointAnim.Play("CheckpointBeingTaken");
