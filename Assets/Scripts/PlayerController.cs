@@ -142,8 +142,8 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {   
-        // If player collided with obstacle then player is hit
-        if(other.gameObject.tag == "Obstacles")
+        // If player collided with an obstacle then player is hit
+        if(other.gameObject.tag == "Obstacle")
         {
             HitObstacle();
         }   
@@ -172,8 +172,8 @@ public class PlayerController : MonoBehaviour
             respawnPoint = other.transform.position;
         }
 
-        // If player triggered by obstacles then player is hit
-        if(other.tag == "Obstacles")
+        // If player triggered by an obstacle then player is hit
+        if(other.tag == "Obstacle")
         {
             HitObstacle();
         }        
