@@ -8,13 +8,13 @@ TagManager:
   - Ground
   - Sky
   - Walls
-  - Obstacles
-  - Props
   - JumpPlatform
   - StartPosition
   - EndPosition
   - Checkpoint
   - FallDetector
+  - Fruit
+  - Obstacle
   layers:
   - Default
   - TransparentFX
