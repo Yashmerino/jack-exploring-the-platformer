@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public Vector3 respawnPoint;
     private int hitsCounter = 0;
 
+    // Other
+    bool coroutineRunning = false;
+    public float hitDelay = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -142,15 +146,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {   
-        // If player collided with an obstacle then player is hit
-        if(other.gameObject.tag == "Obstacle")
-        {
-            HitObstacle();
-        }   
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         // If player triggered by jump platform then add velocity for y axis of the player
@@ -170,12 +165,37 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Checkpoint")
         {
             respawnPoint = other.transform.position;
-        }
+        }    
+    }
 
+    void OnTriggerStay2D(Collider2D other)
+    {
         // If player triggered by an obstacle then player is hit
         if(other.tag == "Obstacle")
         {
-            HitObstacle();
-        }        
+            // If coroutine not running then start it, so we have a delay between hits
+            if(!coroutineRunning)
+                StartCoroutine(HitCoroutine());
+        }    
+    }
+
+     void OnCollisionStay2D(Collision2D collision)
+    {
+        // If player collided with an obstacle then player is hit
+        if(collision.gameObject.tag == "Obstacle")
+        {
+            // If coroutine not running then start it, so we have a delay between hits
+            if(!coroutineRunning)
+                StartCoroutine(HitCoroutine());
+        }  
+    }
+
+    // Delay after being hit
+    IEnumerator HitCoroutine()
+    {   
+        HitObstacle();
+        coroutineRunning = true;
+        yield return new WaitForSeconds(hitDelay);
+        coroutineRunning = false;
     }
 }
