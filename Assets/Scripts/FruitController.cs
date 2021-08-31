@@ -6,11 +6,13 @@ public class FruitController : MonoBehaviour
 {
     // Components
     private Animator fruitAnim;
+    private LevelManager gameLevelManager;
 
     // Start is called before the first frame update
     void Start()
     {
         fruitAnim = GetComponent<Animator>();
+        gameLevelManager = FindObjectOfType<LevelManager>();
     }
 
     // Update is called once per frame
@@ -30,6 +32,9 @@ public class FruitController : MonoBehaviour
         // If fruit triggered by player then play animation
         if(other.tag == "Player")
         {
+            //Add 1 score when fruit collected
+            gameLevelManager.AddFruits(1);
+
             fruitAnim.Play("Collected");
             DestroyOnExit();
         }

@@ -8,8 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     // Components
     private Rigidbody2D rigidBody;
-
-    private Animator playerAnim;
+    public Animator playerAnim;
+    public LevelManager gameLevelManager;
+    public HeartSystem uiHeartSystem;
 
     // Movement vars
     public float speed = 6.0f;
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<Animator>();
+        gameLevelManager = FindObjectOfType<LevelManager>();
+        uiHeartSystem = FindObjectOfType<HeartSystem>();
     }
 
     // Update is called once per frame
@@ -123,6 +126,7 @@ public class PlayerController : MonoBehaviour
     // What to do when obstacle hit
     void HitObstacle()
     {
+        uiHeartSystem.DestroyHeart();
         hitsCounter++;
 
         // If hits counter is less than 3 then play hit animation
@@ -134,9 +138,7 @@ public class PlayerController : MonoBehaviour
         {
             hitsCounter = 0;
 
-            transform.position = respawnPoint;
-
-            playerAnim.Play("Appearing");
+            gameLevelManager.Respawn();
         }
     }
 
@@ -160,10 +162,8 @@ public class PlayerController : MonoBehaviour
         // If player triggered by fall detector then respawn player to the checkpoint and play appearing animation
         if(other.tag == "FallDetector")
         {
-            transform.position = respawnPoint;
-
-            playerAnim.Play("Appearing");
-
+            uiHeartSystem.DestroyAllHearts();
+            gameLevelManager.Respawn();
         }
 
         // If player triggered by checkpoint then change respawn position
