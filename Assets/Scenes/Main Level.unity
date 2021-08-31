@@ -160,7 +160,7 @@ MonoBehaviour:
   gamePlayer: {fileID: 0}
   scoreText: {fileID: 2079806871}
   uiHeartSystem: {fileID: 0}
-  respawnDelay: 2
+  respawnDelay: 0.5
   fruits: 0
 --- !u!4 &408767458
 Transform:
