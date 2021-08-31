@@ -11,7 +11,7 @@ public class LevelManager : MonoBehaviour
     public HeartSystem uiHeartSystem;
 
     // Vars
-    public float respawnDelay = 2.0f;
+    public float respawnDelay = 0.5f;
     public int fruits = 0;
 
     // Start is called before the first frame update
@@ -37,7 +37,9 @@ public class LevelManager : MonoBehaviour
     public IEnumerator RespawnCoroutine()
     {
         // Player not active anymore
-        gamePlayer.gameObject.SetActive(false);
+        //gamePlayer.gameObject.SetActive(false);
+        (gamePlayer.GetComponent<Rigidbody2D>()).constraints = RigidbodyConstraints2D.FreezeAll;
+        gamePlayer.playerAnim.Play("Disappearing");
 
         // Wait for 2 seconds before doing other stuff
         yield return new WaitForSeconds(respawnDelay);
@@ -49,6 +51,7 @@ public class LevelManager : MonoBehaviour
         gamePlayer.playerAnim.Play("Appearing");
         // Set the player active again
         gamePlayer.gameObject.SetActive(true);
+        (gamePlayer.GetComponent<Rigidbody2D>()).constraints = RigidbodyConstraints2D.FreezeRotation;
         // Restart hearts
         uiHeartSystem.RestartHearts();
     }
