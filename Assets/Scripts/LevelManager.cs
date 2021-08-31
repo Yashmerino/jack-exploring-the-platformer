@@ -36,9 +36,9 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator RespawnCoroutine()
     {
-        // Player not active anymore
-        //gamePlayer.gameObject.SetActive(false);
+        // Freeze rigid body so you can't move it
         (gamePlayer.GetComponent<Rigidbody2D>()).constraints = RigidbodyConstraints2D.FreezeAll;
+        // Play disappearing animation
         gamePlayer.playerAnim.Play("Disappearing");
 
         // Wait for 2 seconds before doing other stuff
@@ -51,6 +51,7 @@ public class LevelManager : MonoBehaviour
         gamePlayer.playerAnim.Play("Appearing");
         // Set the player active again
         gamePlayer.gameObject.SetActive(true);
+        // Reset rigidbody constraints
         (gamePlayer.GetComponent<Rigidbody2D>()).constraints = RigidbodyConstraints2D.FreezeRotation;
         // Restart hearts
         uiHeartSystem.RestartHearts();
