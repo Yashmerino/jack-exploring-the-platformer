@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7105108865744422933}
   - component: {fileID: 7105108865744422935}
   - component: {fileID: 7105108865744422953}
-  - component: {fileID: 7105108865744422934}
+  - component: {fileID: 313852071212367734}
   m_Layer: 0
   m_Name: SpikeHead
   m_TagString: Obstacle
@@ -125,8 +125,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &7105108865744422934
-BoxCollider2D:
+--- !u!60 &313852071212367734
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -148,6 +148,18 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.4311382, y: 0.41517004}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.21896668, y: 0.0827878}
+      - {x: 0.14063476, y: 0.13263145}
+      - {x: 0.095731124, y: 0.20734912}
+      - {x: -0.08161821, y: 0.2105849}
+      - {x: -0.13426888, y: 0.1339576}
+      - {x: -0.13557516, y: 0.13132556}
+      - {x: -0.20734847, y: 0.08161778}
+      - {x: -0.20896755, y: -0.09323588}
+      - {x: -0.13557602, y: -0.14426899}
+      - {x: -0.078675106, y: -0.2189669}
+      - {x: 0.092202246, y: -0.21896689}
+      - {x: 0.1429744, y: -0.14381117}
+      - {x: 0.21896668, y: -0.095438674}
