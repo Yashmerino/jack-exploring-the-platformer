@@ -29,6 +29,15 @@ public class PlayerController : MonoBehaviour
     public Vector3 respawnPoint;
     private int hitsCounter = 0;
 
+    // Audio
+    private AudioSource playerAudio;
+    public AudioSource jumpSound;
+    public AudioSource damageSound;
+    public AudioSource jpSound;
+    public AudioSource fruitSound;
+    public AudioSource checkpointSound;
+    public AudioSource dyingSound;
+
     // Other
     bool coroutineRunning = false;
     public float hitDelay = 1.0f;
@@ -40,6 +49,7 @@ public class PlayerController : MonoBehaviour
         playerAnim = GetComponent<Animator>();
         gameLevelManager = FindObjectOfType<LevelManager>();
         uiHeartSystem = FindObjectOfType<HeartSystem>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -94,6 +104,7 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpForce);
+            jumpSound.Play();
         }
     }
 
@@ -131,6 +142,7 @@ public class PlayerController : MonoBehaviour
     void HitObstacle()
     {
         uiHeartSystem.DestroyHeart();
+        damageSound.Play();
         hitsCounter++;
 
         // If hits counter is less than 3 then play hit animation
@@ -140,6 +152,8 @@ public class PlayerController : MonoBehaviour
         } // Else reset hits counter, respawn player to the checkpoint and play appearing animation
         else
         {
+            dyingSound.Play();
+
             hitsCounter = 0;
 
             gameLevelManager.Respawn();
@@ -151,12 +165,14 @@ public class PlayerController : MonoBehaviour
         // If player triggered by jump platform then add velocity for y axis of the player
         if(other.tag == "JumpPlatform")
         {
+            jpSound.Play();
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, launchForce);
         }
 
         // If player triggered by fall detector then respawn player to the checkpoint and play appearing animation
         if(other.tag == "FallDetector")
         {
+            dyingSound.Play();
             uiHeartSystem.DestroyAllHearts();
             gameLevelManager.Respawn();
         }
@@ -164,8 +180,15 @@ public class PlayerController : MonoBehaviour
         // If player triggered by checkpoint then change respawn position
         if(other.tag == "Checkpoint")
         {
+            checkpointSound.Play();
             respawnPoint = other.transform.position;
         }    
+
+        // If player triggered by fruit then play sound
+        if(other.tag == "Fruit")
+        {
+            fruitSound.Play();
+        }
     }
 
     void OnTriggerStay2D(Collider2D other)
