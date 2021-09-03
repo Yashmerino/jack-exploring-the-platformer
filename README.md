@@ -1,4 +1,4 @@
-<p align="center"><img src="demo/Logo.png" alt="jetp logo" height=100 width=1000></p>
+<p align="center"><img src="demo/Logo.png" alt="jetp logo" height=80 width=1000></p>
   
 # How to play the game?
 
