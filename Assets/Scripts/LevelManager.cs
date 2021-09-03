@@ -36,6 +36,9 @@ public class LevelManager : MonoBehaviour
 
     public IEnumerator RespawnCoroutine()
     {
+        // Losing score on death
+        LostFruits();
+
         // Freeze rigid body so you can't move it
         (gamePlayer.GetComponent<Rigidbody2D>()).constraints = RigidbodyConstraints2D.FreezeAll;
         // Play disappearing animation
@@ -61,6 +64,18 @@ public class LevelManager : MonoBehaviour
     public void AddFruits(int numberOfFruits)
     {
         fruits += numberOfFruits;
+        // Change text to current amount of collected fruits
+        scoreText.text = "Fruits: " + fruits;
+    }
+
+    public void LostFruits()
+    {
+        // If there are more than 2 fruits then remove 2 fruits
+        if(fruits >= 2)
+            fruits -= 2;
+        else // If there are less than 2 fruits then set number of fruits to 0
+            fruits = 0;
+
         // Change text to current amount of collected fruits
         scoreText.text = "Fruits: " + fruits;
     }
