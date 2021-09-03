@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -188,6 +189,13 @@ public class PlayerController : MonoBehaviour
         if(other.tag == "Fruit")
         {
             fruitSound.Play();
+        }
+
+        // If player triggered by the end trophy
+        if(other.tag == "EndPosition")
+        {
+            // Goes to the next scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
