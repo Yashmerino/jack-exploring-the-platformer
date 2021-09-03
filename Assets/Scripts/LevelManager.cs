@@ -2,17 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class LevelManager : MonoBehaviour
 {
     // Components
     public PlayerController gamePlayer;
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public HeartSystem uiHeartSystem;
 
     // Vars
     public float respawnDelay = 0.5f;
     public int fruits = 0;
+
+    // Audio
+    public AudioSource music;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +24,9 @@ public class LevelManager : MonoBehaviour
         // Find the object with "PlayerController" script
         gamePlayer = FindObjectOfType<PlayerController>();
         uiHeartSystem = FindObjectOfType<HeartSystem>();
+
+        // Play music
+        music.Play();
     }
 
     // Update is called once per frame
