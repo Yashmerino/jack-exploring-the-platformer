@@ -32,7 +32,7 @@ public class FruitController : MonoBehaviour
         // If fruit triggered by player then play animation
         if(other.tag == "Player")
         {
-            //Add 1 score when fruit collected
+            //Add 1 fruit when fruit collected
             gameLevelManager.AddFruits(1);
 
             fruitAnim.Play("Collected");
